@@ -5,11 +5,12 @@ function App() {
 
   const [allTileData, setAllTileData] = useState([]);
 
-  // const updateTheBoard = () =>
-  //   setAllTileData([...tileDataArray, {
-  //     id: tileDataArray.id,
-  //     value: tileDataArray.currentValue
-  //   }])
+  const clickFunction = () =>
+    setAllTileData([...tileDataArray, {
+      id: allTileData.id,
+      value: allTileData.currentValue,
+      possibleMoves: allTileData.possibleMoves
+    }])
 
   let tileDataArray = []
   for (let i = 0; i < 16; i++) {
@@ -18,33 +19,34 @@ function App() {
     console.log(tileDataArray)
   }
   
-  const clickFunction = (tileID) => {
-    for (let i = 0; i < 15; i++) {
+  // const clickFunction = () => {
+    // console.log()
+    // for (let i = 0; i < 15; i++) {
       // console.log(allTileData)
-      var zeroTile = tileID.currentValue
-      if (zeroTile === 0)
-        for (let j = 0; j < allTileData.possibleMoves.length; j++) {
-          var possibleMoveID = allTileData.possibleMoves[j];
-          var currentMoveToCheck = allTileData[i].id
-          if (possibleMoveID === currentMoveToCheck) {
-            console.log('can switch')
-            let copy = allTileData
-            let temp = 0
-            temp = copy[tileID].currentValue
-            copy[tileID].currentValue = copy[i].currentValue
-            copy[i].currentValue = temp
-            console.log(copy)
-
-            setAllTileData([...tileDataArray, {
-              id: allTileData.id,
-              value: allTileData.currentValue
-            }])
-          } else if(possibleMoveID != currentMoveToCheck) {
-            console.log('can not switch')
-          }
-        }
-    }
-  }
+      // var currentVale = allTileData.currentValue
+      // if (zeroTile === 0)
+      // console.log(allTileData)
+      // for (let j = 0; j < allTileData.length; j++) {
+      //   var possibleMoveID = allTileData.possibleMoves[j];
+      //   var currentMoveToCheck = allTileData[i].id
+        //   if ( === currentMoveToCheck) {
+        //     console.log('can switch')
+        //     let copy = allTileData
+        //     let temp = 0
+        //     temp = copy[tileID].currentValue
+        //     copy[tileID].currentValue = copy[i].currentValue
+        //     copy[i].currentValue = temp
+        //     // console.log(copy)
+        //     setAllTileData([...tileDataArray, {
+        //       id: allTileData.id,
+        //       value: allTileData.currentValue
+        //     }])
+        //   } else if(possibleMoveID !== currentMoveToCheck) {
+        //     console.log('can not switch')
+        //   }
+        // }
+    // }
+  // }
 
   let allButtonArray = []
   for (let i = 0; i < tileDataArray.length; i++) {
@@ -55,7 +57,6 @@ function App() {
       style={{ height: 150, width: 250 }} key={allTileData.id}>{num.currentValue}</Button>
     allButtonArray.push(allButton)
   }
-  // console.log(allTileData.possibleMoves.length)
 
   return (
     <Container>
