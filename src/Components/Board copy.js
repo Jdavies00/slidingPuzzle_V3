@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container } from 'reactstrap'
+import {Button, Container} from 'reactstrap'
 
 export default class Slider extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export default class Slider extends Component {
       Clicks: 0
     }
   }
-  //when tile is clicked
+//when tile is clicked
   isClicked({ id, value, moves }) {
     let Tiles = this.state.Tiles
     let Clicks = this.state.Clicks
@@ -39,13 +39,13 @@ export default class Slider extends Component {
     let Tiles = this.state.Tiles
     let Clicks = this.state.Clicks
     Clicks = 0
-    for (let i = 0; i <= 50; i++) {
-      let blank = Tiles.find(item => item.value === 0)  //find tile value 0
-      let blankValue = blank.value
-      let newTile = Tiles[blank.moves[Math.floor(Math.random() * ((blank.moves.length)))]] //picks random move
-      let newValue = newTile.value  //swaps values
-      newTile.value = blankValue
-      blank.value = newValue
+    for(let i=0;i<=50;i++){
+    let blank = Tiles.find(item => item.value === 0)  //find tile value 0
+    let blankValue = blank.value
+    let newTile = Tiles[blank.moves[Math.floor(Math.random() * ((blank.moves.length)))]] //picks random move
+    let newValue = newTile.value  //swaps values
+    newTile.value = blankValue
+    blank.value = newValue
     }
     this.setState({
       Tiles,
@@ -53,11 +53,11 @@ export default class Slider extends Component {
     })
   }
   //sets all all values back to their original position
-  reset() {
+  reset(){
     let Tiles = this.state.Tiles
     let Clicks = this.state.Clicks
-    for (let i = 0; i <= 15; i++) {
-      Tiles[i].value = i
+    for(let i=0; i<=15; i++){
+        Tiles[i].value = i
     }
     Clicks = 0
     this.setState({
@@ -67,30 +67,26 @@ export default class Slider extends Component {
   }
   render() {
     return (
-      <>
-        <Container className="bg-info">
+      <div className = "bg-info">  
+        <div className="row d-flex text-center">
           <h4 className="col-12 text-primary">Zero is the empty block! Click Start, then slide the peices back to their orignal positions</h4>
-          <div className="row d-flex text-center">
-            {
-              this.state.Tiles.map((item, i) =>   //mapping through tiles array
-                <Button className= "primary"
-                  key={i}
-                  id={i}
-                  // className="col-3 border border-info text-primary bg-success"
-                  onClick={() => this.isClicked(item)}
-                // style={{height: 110, fontSize: '15px', fontWeight: 700, margin:"auto"}}
-                >
-                  {item.value}
-                </Button>
-              )
-            }
-          </div>
-          <p className="text-primary">Moves: {this.state.Clicks}</p>
-          <Button onClick={() => this.shuffle()}>Start!</Button>
-          <Button onClick={() => this.reset()}>Reset</Button>
-        </Container>
-
-      </>
+          {
+            this.state.Tiles.map((item, i) =>   //mapping through tiles array
+              <div
+                key={i}
+                id={i}
+                className="col-3 border border-info text-primary bg-success"
+                onClick={() => this.isClicked(item)}
+                style={{height: 110, fontSize: '15px', fontWeight: 700, margin:"auto"}}>
+                {item.value}
+              </div>
+            )
+          }
+        </div>
+        <p className="text-primary">Moves: {this.state.Clicks}</p>
+        <Button  onClick={() => this.shuffle()}>Start!</Button>  
+        <Button  onClick={() => this.reset()}>Reset</Button>
+      </div >
     )
   }
 }
